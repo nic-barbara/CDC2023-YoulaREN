@@ -98,6 +98,7 @@ println("Baseline cost: ", round(Jb; sigdigits=5))
     model_types = [
         "feedback-lstm",
         "youla-ren-obsv-small",
+        "youla-gren2000-obsv-small",
         "youla-gren1000-obsv-small",
         "youla-gren500-obsv-small",
         "youla-gren250-obsv-small",
@@ -107,13 +108,13 @@ println("Baseline cost: ", round(Jb; sigdigits=5))
     hp = Dict(
         "modeltype"      => model_types,
         "nx"             => 32,
-        "nv"             => [28, 64, 64, 64, 64],
+        "nv"             => [28, 64, 64, 64, 64, 64],
         "ϕfunc"          => Flux.relu,
         "div_factor"     => 8,
 
         "n_evals"        => 150000,
-        "stepsize"       => [1e-2, 5e-3, 5e-3, 5e-3, 5e-3] ,
-        "explore_mag"    => [1e-2, 1e-2, 5e-2, 5e-2, 5e-2,],
+        "stepsize"       => [1e-2, 5e-3, 5e-3, 5e-3, 5e-3, 5e-3],
+        "explore_mag"    => [1e-2, 1e-2, 1e-2, 5e-2, 5e-2, 5e-2],
         "state_batches"  => 50,
         "policy_batches" => 16,
         "grad_clip"      => 10,

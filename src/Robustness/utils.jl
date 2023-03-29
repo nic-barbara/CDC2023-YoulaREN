@@ -296,7 +296,7 @@ end
 get_name(fname) = fname[1:end-8]
 
 # Order files by non-lipschitz, then increasing Lipschitz
-function order_files(fnames; ascending=true)
+function order_files(fnames; ascending=false)
 
     # Store the non-Lipschitz files
     fnames1 = []
@@ -328,11 +328,11 @@ function get_marker(m)
 end
 
 # Assign different colours
-function get_colour(m, k, n_nonlip)
+function get_colour(m, k, n_nonlip; fudge_colours=false)
     if occursin("gren", m)
-        return ColorSchemes.Greys_9[9 - k + n_nonlip]
+        return ColorSchemes.Greys_9[k - n_nonlip + 4]
     else
-        # k = (k == 1) ? 2 : ((k == 2) ? 1 : k)
+        fudge_colours && (k = (k+1) % 3 + 1)
         return ColorSchemes.Dark2_3[k]
     end
 end
@@ -356,7 +356,7 @@ function get_label(m)
         γ = split(m,"-")[2][5:end]
         return "Youla-γREN (γ = $γ)"
     elseif occursin("ren", m)
-        return "Youla-REN"
+        return "Youla-REN (γ = ∞)"
     elseif occursin("lstm",m)
         return "Feedback-LSTM"
     else

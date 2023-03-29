@@ -24,17 +24,16 @@ fnames, n_nonlip = order_files(fnames)
 # Find all files for same model
 fnames_no_version_num = get_name.(fnames)
 models = unique(fnames_no_version_num)
-models = models[[2,3,1,4,5,6]]
 
 # Set up a figure
-size_inches = (10, 5)
+size_inches = (12, 5)
 size_pt = 100 .* size_inches
 f1 = Figure(resolution = size_pt, fontsize = 24)
 ga = f1[1,1] = GridLayout()
 
 # Set up the axes
 ax1 = Axis(ga[1,1], xlabel="Attack Size", ylabel="Normalized Cost")
-ax2 = Axis(ga[1,2], xlabel="Lipschitz Bound", ylabel="Critical Attack Size",
+ax2 = Axis(ga[1,2], xlabel="Lipschitz Lower Bound", ylabel="Critical Attack Size",
            xticks=([2.5,3,3.5,4],["10²\u02D9⁵", "10³", "10³\u02D9⁵", "10⁴"]))
 
 # Add a line for the cross-section
@@ -51,7 +50,7 @@ lwidth = 2
 for k in eachindex(models)
 
     m = models[k]
-    colour = get_colour(m, k, n_nonlip)
+    colour = get_colour(m, k, n_nonlip; fudge_colours=true)
     marker = get_marker(m)
     lstyle = get_lstyle(m)
     bar_colour = colour
@@ -109,25 +108,14 @@ for k in eachindex(models)
         color=bar_colour, direction=:x, whiskerwidth=wwidth
     )
 
-    # Add in other data points for max. Lipschitz bound estimates
-    scatter!(
-        ax2, log10(γmax_mean), ϵcrit_mean, marker = marker, 
-        markersize = msize, color = (colour, alpha)
-    )
-    rangebars!(
-        ax2, [log10(γmax_mean)], [ϵcrit_min], [ϵcrit_max], 
-        color=bar_colour, direction=:y, whiskerwidth=wwidth
-    )
-    rangebars!(
-        ax2, [ϵcrit_mean], [log10(γmax_min)], [log10(γmax_max)], 
-        color=bar_colour, direction=:x, whiskerwidth=wwidth
-    )
-
 end
 
 # Format
 xlims!(ax1, xmin, xmax)
 ylims!(ax1, ymin, ymax)
+
+xlims!(ax2, 2.2, 4.5)
+ylims!(ax2, 0.033, 0.0435)
 
 Legend(ga[2,1:2], ax1, orientation=:horizontal,nbanks=2)
 display(f1)

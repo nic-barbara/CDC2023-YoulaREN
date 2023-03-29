@@ -12,7 +12,7 @@ includet("./../Robustness/utils.jl")
 includet("qube_servo_controller.jl")
 includet("qube_utils.jl")
 
-# Legacy fix when loading data
+# Legacy fix
 RecurrentEquilibriumNetworks = RobustNeuralNetworks
 
 do_save = false

@@ -115,19 +115,20 @@ println("Baseline cost: ", round(Jb; sigdigits=5))
         "youla-gren200-small",
         "youla-gren100-small",
         "youla-gren50-small",
+        "youla-gren25-small",
     ]
 
     # Hyperparameters
     hp = Dict(
         "modeltype"      => model_types,
         "nx"             => 32,
-        "nv"             => [28, 64, 64, 64, 64],
+        "nv"             => [28, 64, 64, 64, 64, 64],
         "ϕfunc"          => Flux.relu,
         "div_factor"     => 8,
 
         "n_evals"        => 150000,
         "stepsize"       => 1e-2,
-        "explore_mag"    => [2e-2, 5e-2, 5e-2, 5e-2, 5e-2],
+        "explore_mag"    => [2e-2, 5e-2, 5e-2, 5e-2, 5e-2, 5e-2],
         "state_batches"  => 50,
         "policy_batches" => 16,
         "grad_clip"      => 10,

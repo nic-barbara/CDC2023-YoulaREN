@@ -12,7 +12,7 @@ includet("./../Robustness/utils.jl")
 includet("./output_fdback_backstep.jl")
 includet("./mag_utils.jl")
 
-# Legacy fix when loading data
+# Legacy fix
 RecurrentEquilibriumNetworks = RobustNeuralNetworks
 
 do_save = false
