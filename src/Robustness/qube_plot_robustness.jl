@@ -26,17 +26,18 @@ fnames, n_nonlip = order_files(fnames)
 # Find all files for same model
 fnames_no_version_num = get_name.(fnames)
 models = unique(fnames_no_version_num)
+models = models[1:5]
 
 # Set up a figure
-size_inches = (12, 5)
+size_inches = (6, 5)
 size_pt = 100 .* size_inches
-f1 = Figure(resolution = size_pt, fontsize = 24)
+f1 = Figure(resolution = size_pt, fontsize = 20)
 ga = f1[1,1] = GridLayout()
 
 # Set up the axes
 ax1 = Axis(ga[1,1], xlabel="Attack Size", ylabel="Normalized Cost")
-ax2 = Axis(ga[1,2], xlabel="Lipschitz Lower Bound", ylabel="Critical Attack Size",
-           xticks=([2,3,4,5],["10²", "10³", "10⁴", "10⁵"]))
+# ax2 = Axis(ga[1,2], xlabel="Lipschitz Lower Bound", ylabel="Critical Attack Size",
+        #    xticks=([2,3,4,5],["10²", "10³", "10⁴", "10⁵"]))
 
 # Add a line for the cross-section
 xmin, xmax = 0.0, 0.8
@@ -97,19 +98,19 @@ for k in eachindex(models)
     lines!(ax1, ϵs, costs_mean, label = lab, color = colour, 
            linewidth=lwidth, linestyle = lstyle)
 
-    # Plot critical eps as scatter plot with error bars
-    scatter!(
-        ax2, log10(γmin_mean), ϵcrit_mean, marker = marker, 
-        markersize = msize, label = lab, color = colour
-    )
-    rangebars!(
-        ax2, [log10(γmin_mean)], [ϵcrit_min], [ϵcrit_max], 
-        color=bar_colour, direction=:y, whiskerwidth=wwidth
-    )
-    rangebars!(
-        ax2, [ϵcrit_mean], [log10(γmin_min)], [log10(γmin_max)], 
-        color=bar_colour, direction=:x, whiskerwidth=wwidth
-    )
+    # # Plot critical eps as scatter plot with error bars
+    # scatter!(
+    #     ax2, log10(γmin_mean), ϵcrit_mean, marker = marker, 
+    #     markersize = msize, label = lab, color = colour
+    # )
+    # rangebars!(
+    #     ax2, [log10(γmin_mean)], [ϵcrit_min], [ϵcrit_max], 
+    #     color=bar_colour, direction=:y, whiskerwidth=wwidth
+    # )
+    # rangebars!(
+    #     ax2, [ϵcrit_mean], [log10(γmin_min)], [log10(γmin_max)], 
+    #     color=bar_colour, direction=:x, whiskerwidth=wwidth
+    # )
 
 end
 
@@ -117,11 +118,12 @@ end
 xlims!(ax1, xmin, xmax)
 ylims!(ax1, ymin, ymax)
 
-xlims!(ax2, log10(20), 4.1)
-ylims!(ax2, 0.3, 0.8)
+# xlims!(ax2, log10(20), 4.1)
+# ylims!(ax2, 0.3, 0.8)
 
 
-Legend(ga[2,1:2], ax1, orientation=:horizontal,nbanks=2)
+# Legend(ga[2,1:2], ax1, orientation=:horizontal,nbanks=2)
+Legend(ga[2,1], ax1, orientation=:horizontal,nbanks=3)
 display(f1)
 
 # Save the figure

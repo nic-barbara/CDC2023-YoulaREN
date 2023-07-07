@@ -24,8 +24,8 @@ Jb = Jb[1]
 J_nmpc = 907 / Jb
 
 # Figure setup
-fsize = 24
-size_inches = (8, 6)
+fsize = 20
+size_inches = (6,5)
 size_pt = 100 .* size_inches
 
 f = Figure(resolution = size_pt, fontsize = fsize)
@@ -35,6 +35,7 @@ ax = Axis(ga[1,1], xlabel = "Epochs", ylabel = "Normalized cost")
 # Models and x-axis array
 models = unique(data.model)
 models, n_nonlip = order_files(models)
+models = models[1:4]
 nc = length(data.costs[1])
 x = (0:nc-1)/nc*data.nevals[1]/data.N[1]
 
@@ -46,7 +47,7 @@ function plot_results()
         m = models[k]
         lab = get_label(m)
         lstyle = get_lstyle(m)
-        colour = get_colour(m, k, n_nonlip)
+        colour = k > 2 ? get_colour(m, k+1 , n_nonlip) : get_colour(m, k , n_nonlip)
 
         m_costs = data[data.model .==  models[k]].costs/Jb
         μ, _, cmin, cmax = cost_stats(m_costs)
