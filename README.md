@@ -10,9 +10,7 @@ This code has been tested with `juilia v1.7.3` and `RobustNeuralNetworks.jl` ver
 
 2. Activate the repository. Enter the package manager by typing `]` in the REPL, then type `activate .`
 
-3. Our models depend on the `RobustNeuralNetworks.jl` package, which is currently unregistered and must be added separately. Within the package manager, type `add git@github.com:acfr/RobustNeuralNetworks.jl.git` to add the package.
-
-4. Instantiate the rest of the project. Type `instantiate` within the package manager
+3. Instantiate the project. Type `instantiate` within the package manager
 
 ## Usage
 
