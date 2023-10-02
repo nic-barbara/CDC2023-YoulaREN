@@ -8,7 +8,7 @@ This code has been tested with `juilia v1.7.3` and `RobustNeuralNetworks.jl` ver
 
 1. Clone this git repository and start the Julia REPL within the project root directory. 
 
-2. Activate the repository. Enter the package manager by typing `]` in the REPL, then type `activate .` This may produce an error about `RobustNeuralNetworks.jl` not being registered. Proceed to the next step.
+2. Activate the repository. Enter the package manager by typing `]` in the REPL, then type `activate .`
 
 3. Our models depend on the `RobustNeuralNetworks.jl` package, which is currently unregistered and must be added separately. Within the package manager, type `add git@github.com:acfr/RobustNeuralNetworks.jl.git` to add the package.
 
