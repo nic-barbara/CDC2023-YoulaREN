@@ -15,7 +15,7 @@ includet("./mag_utils.jl")
 # Legacy fix
 RecurrentEquilibriumNetworks = RobustNeuralNetworks
 
-do_save = false
+do_save = true
 
 # Read in data
 fpath = "../../results/mag-experiment/"
