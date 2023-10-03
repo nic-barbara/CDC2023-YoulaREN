@@ -6,11 +6,19 @@ This code has been tested with `juilia v1.7.3` and `RobustNeuralNetworks.jl` ver
 
 ## Installation
 
-1. Clone this git repository and start the Julia REPL within the project root directory. 
+Clone this git repository and start the Julia REPL within the project root directory.
+```
+git clone https://github.com/nic-barbara/CDC2023-YoulaREN.git
+cd CDC2023-YoulaREN
+```
 
-2. Activate the repository. Enter the package manager by typing `]` in the REPL, then type `activate .`
-
-3. Instantiate the project. Type `instantiate` within the package manager
+Start a Julia session, then activate the repository and install dependencies
+```julia
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+```
+This project depends on a number of larger packages (eg: `Flux.jl`) and an older version of Julia (`v1.7.3`) so installation may take a few minutes.
 
 ## Usage
 
